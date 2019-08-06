@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+    <div class="display_title">
+        <h1>Latest Items</h1>
+    </div>
+    <div class="items">
+        <ul>
+            {% if user is not none %}
+            <li>
+                <a href="{{ url_for('AddItem') }}" class="additembtn">Add Item</a>
+            </li>
+            {% endif %}
+            {% for item in items %}
+                <li class="itemframe">
+                    <div class="itemlistcontainer">
+                        <a class="item_name" href="{{ url_for('ShowItem', category_name = item.category.name, item_name = item.name) }}">{{ item.name }}&nbsp;</a>
+                        <p>( {{ item.category.name }} )</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

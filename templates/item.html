@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+    <div class="itemcontainer">
+        <h1>{{ item.name }}</h1>
+        <p class="itemdescription">{{ item.description }}</p>
+        {% if owner %}
+        <a href="{{ url_for('EditItem', item_name = item.name) }}" class="itembtn">Edit</a>
+        <p class="breaker">|</p>
+        <a href="{{ url_for('DeleteItem', item_name = item.name) }}" class="itembtn">Delete</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

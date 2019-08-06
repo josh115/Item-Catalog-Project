@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" type="text/css" href="http://localhost:5000/static/style.css">
+	</head>
+	<body>
+        <header>
+            <div class="header_upper">
+                <a href="{{ url_for('Main') }}" class="title">Catalog App</a>
+                <div class="login">
+					{% if user is none %}
+                    <a href="{{ url_for('Login') }}" class="loginButton">Sign into your account</a>
+					{% else %}
+					<p class="username">{{ user }}</p>
+					<a href="{{ url_for('Logout') }}" class="logoutButton">Logout</a>
+					{% endif %}
+                </div>
+            </div>
+            <div class="header_lower">
+                <nav>
+                    <ul class="categories">
+                        {% for category in categories %}
+                            <li class="category">
+                                <a href="{{ url_for('ShowCategory', category_name = category.name) }}" class="category_name">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="content">
+                {% block content %}
+				{% endblock %}
+        </div>
+	</body>
+</html>

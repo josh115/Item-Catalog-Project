@@ -1,0 +1,233 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+	background: transparent;
+	font-family: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-se;
+}
+
+ul {
+    list-style-type: none;
+}
+
+header{
+	width: 100%;
+	background-color: #1D2226;
+}
+
+.header_upper{
+    margin-left: 45px;
+    margin-right: 45px;
+	height: 65px;
+}
+
+.header_lower{
+	border-top: 2px solid #8c4605;
+	box-sizing: border-box;
+    width: 100%;
+}
+
+.title{
+	color: white;
+	line-height: 65px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.login{
+    margin-top: 15px;
+	text-align: right;
+	float: right;
+}
+
+.loginButton{
+    line-height: 35px;
+	color: #c9c9c9;
+	text-decoration: none;
+}
+
+.categories{
+    margin: 0 auto;
+    height: 65px;
+    display: table;
+}
+
+.category{
+    cursor: pointer;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.category_name{
+    max-width: 100px;
+    height: 65px;
+    padding: 0 11px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.content{
+    overflow: auto;
+	max-width: 1241px;
+    width: 100%;
+    margin: 0 auto 0 auto;
+    background: #f6f6f6;
+	height: 100vh;
+}
+
+.display_title{
+	text-align: center;
+	padding: 20px;
+}
+
+.items{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.item_name{
+    text-decoration: none;
+}
+
+.loginbox{
+	border-radius: 25px;
+    border: 1px solid #00b7ff;
+    background-color: #e8e8e8;
+    max-width: 500px;
+    padding: 40px;
+	height: 200px;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.username{
+    color: white;
+}
+
+.logoutButton{
+    color: #c9c9c9;
+}
+
+.itemcontainer{
+    padding: 5%;
+    background-color: white;
+    margin: 100px auto;
+    width: 60%;
+    box-shadow: 0 0 10px rgba(30,30,30, 0.4);
+}
+
+.itemdescription{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.itembtn{
+    display: inline; 
+    color:#00b7ff;
+    text-decoration: none;
+}
+
+.breaker{
+    font-size: 20px;
+    display: inline;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.itemeditcontainer{
+    margin-top: 20px;
+    display: grid;
+}
+
+.break{
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+}
+
+.label{
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+}
+
+.submitbtn{
+    cursor: pointer;
+    background-color: #00b7ff;
+    color: #fff;
+    height: 25px;
+    border: 0;
+    font-weight: 500;
+    font-size: 15px;
+    width: 30%;
+    margin: 20px auto;
+    border-radius: 20px;
+}
+
+.categoryselect{
+    width: 20%;
+}
+
+.deleteitembtn{
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    display: inline; 
+    color:#00b7ff;
+    font-size: 16px;
+}
+
+.itemlistcontainer{
+    display: flex; 
+    border-radius: 15px;
+    background-color: #fff;
+    border: 1px #c1c1c1 solid;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.itemframe{
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.additembtn{
+    display: block;
+    border-radius: 25px;
+    width: 20%;
+    background-color: #00b7ff;
+    color: #fff;
+    height: 35px;
+    margin: auto;
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+}
+
+#signinButton{
+    width: 100%;
+    background-color: #00b7ff;
+    color: #fff;
+    height: 45px;
+    font-size: 20px;
+    border: 0;
+    cursor: pointer;
+}
