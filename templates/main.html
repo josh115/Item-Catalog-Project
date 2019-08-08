@@ -8,10 +8,10 @@
             <div class="header_upper">
                 <a href="{{ url_for('Main') }}" class="title">Catalog App</a>
                 <div class="login">
-					{% if user is none %}
+					{% if 'username' not in session %}
                     <a href="{{ url_for('Login') }}" class="loginButton">Sign into your account</a>
 					{% else %}
-					<p class="username">{{ user }}</p>
+					<p class="username">{{ user['username'] }}</p>
 					<a href="{{ url_for('Logout') }}" class="logoutButton">Logout</a>
 					{% endif %}
                 </div>

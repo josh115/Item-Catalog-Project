@@ -8,9 +8,9 @@
             <div class="itemeditcontainer">
                 <input type="hidden" name="id" value="{{ item.id }}">
                 <label class="label" for="name">Name:</label>
-                <input type ="text" name="name" value="{{ item.name }}">
+                <input type ="text" name="name" value="{{ item.name }}" required>
                 <label class="label" for="name">Description:</label>
-                <input type ="text" name="description" value="{{ item.description }}">
+                <input type ="text" name="description" value="{{ item.description }}" required>
                 <label class="label" for="category">Category:</label>
                 <select class="categoryselect" name="category">
                     {% for category in categories %}

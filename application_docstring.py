@@ -38,6 +38,15 @@ categories = session.query(Category).order_by(asc(Category.name))
 # User Helper Functions
 
 def createUser(login_session):
+    """Creates a new user in database.
+    
+    Args:
+        login_session: session object with user data.
+
+    Returns:
+        on found: user.id: Unique id of the new user.
+        on not found: None.
+    """
     newUser = User(name=login_session['username'],
                    email=login_session['email'])
     session.add(newUser)
@@ -47,6 +56,14 @@ def createUser(login_session):
 
 
 def getUserID(email):
+    """Checks if user exists.
+    
+    Args:
+        email: email of the user.
+
+    Returns:
+        user.id: Unique id of the new user.
+    """
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
@@ -56,6 +73,11 @@ def getUserID(email):
 
 @app.route('/')
 def Main():
+    """Displays the home page to the user with the items in the catalog.
+    
+    Returns:
+        on GET: Page displaying latest items.
+    """
     items = session.query(Item).order_by(Item.id)
     return render_template('index.html', categories=categories,
                            items=items, user=login_session)
@@ -63,6 +85,14 @@ def Main():
 # Show items in a category
 @app.route('/catalog/<string:category_name>/items/')
 def ShowCategory(category_name):
+    """Displays the items in the selected category
+    
+    Args:
+        category_name: The selected category.
+
+    Returns:
+        on GET: Page displaying items in that category.
+    """
     category_name = category_name.replace("%20", " ")
     category = session.query(Category).filter_by(name=category_name).one()
     items = session.query(Item).filter_by(category_id=category.id).all()
@@ -75,6 +105,13 @@ def ShowCategory(category_name):
 # Create Item
 @app.route('/catalog/add/', methods=['GET', 'POST'])
 def AddItem():
+    """Adds a new item to the database
+
+    Returns:
+        on GET: Page displaying items in that category.
+        on POST: Redirect to main page if item is added
+        Redirect to login page if user not logged in
+    """
     # check if user is logged in
     if 'username' not in login_session:
         return redirect(url_for('Login'))
@@ -94,6 +131,15 @@ def AddItem():
 # Read Item
 @app.route('/catalog/<string:category_name>/<string:item_name>/')
 def ShowItem(item_name, category_name):
+    """Display the selected item.
+    
+    Args:
+        category_name: The selected items category.
+        item_name: The selected item.
+
+    Returns:
+        on GET: Page displaying items data.
+    """
     item_name = item_name.replace("%20", " ")
     item = session.query(Item).filter_by(name=item_name).one()
     # check if user is logged in and item belongs to that user
@@ -110,6 +156,17 @@ def ShowItem(item_name, category_name):
 # Update Item
 @app.route('/catalog/<string:item_name>/edit/', methods=['GET', 'POST'])
 def EditItem(item_name):
+    """Edit the selected item.
+    
+    Args:
+        item_name: The selected item.
+
+    Returns:
+        on GET: Page to edit item.
+        on POST: Redirect to main page if item is added to database.
+        Redirect to login page if user not logged in.
+        Redirect to main page if user is not owner.
+    """
     item_name = item_name.replace("%20", " ")
     item = session.query(Item).filter_by(name=item_name).one()
     # check if user is logged in and item belongs to that user
@@ -134,6 +191,17 @@ def EditItem(item_name):
 # Delete Item
 @app.route('/catalog/<string:item_name>/delete', methods=['GET', 'POST'])
 def DeleteItem(item_name):
+    """Delete the selected item.
+    
+    Args:
+        item_name: The selected item.
+
+    Returns:
+        on GET: Page to delete item.
+        on POST: Redirect to main page if item is deleted.
+        Redirect to login page if user not logged in.
+        Redirect to main page if user is not owner.
+    """
     item_name = item_name.replace("%20", " ")
     item = session.query(Item).filter_by(name=item_name).one()
     # check if user is logged in and item belongs to that user
@@ -152,6 +220,11 @@ def DeleteItem(item_name):
 # Login user
 @app.route('/login')
 def Login():
+    """Returns page where user can login in via google oauth
+    
+    Returns:
+        on GET: Page to login.
+    """
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in xrange(32))
     login_session['state'] = state
@@ -160,6 +233,12 @@ def Login():
 # Google login
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
+    """Gets user information from google and sets it to login_session
+    
+    Returns:
+        on POST: Return welcome message is successful
+        Return error message to page if error.
+    """
     # Validate state token
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
@@ -241,6 +320,11 @@ def gconnect():
 # Logout user
 @app.route('/logout')
 def Logout():
+    """Logs the user out.
+    
+    Returns:
+        on GET: Redirect to main page.
+    """
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
             gdisconnect()
@@ -260,6 +344,12 @@ def Logout():
 # Google logout
 @app.route('/gdisconnect')
 def gdisconnect():
+    """Logs the user out if logged in with google.
+    
+    Returns:
+        on GET: Error message to page if fails.
+        Success message if status is 200.
+    """
     # Only disconnect a connected user.
     access_token = login_session.get('access_token')
     if access_token is None:
@@ -285,6 +375,11 @@ def gdisconnect():
 # Shows all items in JSON format
 @app.route('/catalog.json')
 def ShowItemsJSON():
+    """Displays all the category and items within in JSON
+    
+    Returns:
+        on GET: JSON data of Category and items.
+    """
     categoriesJSON = session.query(Category).order_by(Category.id)
     return jsonify(Category=[category.serializeItems
                    for category in categoriesJSON])
